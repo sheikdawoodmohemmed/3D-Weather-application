@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map, of, catchError } from 'rxjs';
 import { GeoResult } from '../models/weather.model';
-
+import { environment } from '../../environments/environments';
 interface RawGeoResponse {
   results?: Array<{
     id: number;
@@ -21,14 +21,12 @@ interface RawGeoResponse {
 @Injectable({ providedIn: 'root' })
 export class GeocodingService {
   private http = inject(HttpClient);
-  private readonly baseUrl = 'https://geocoding-api.open-meteo.com/v1/search';
-  private readonly reverseUrl = 'https://geocoding-api.open-meteo.com/v1/reverse';
 
   search(query: string, count = 6): Observable<GeoResult[]> {
     if (!query || query.trim().length < 2) {
       return of([]);
     }
-    const url = `${this.baseUrl}?name=${encodeURIComponent(query.trim())}&count=${count}&language=en&format=json`;
+    const url = `${environment.baseUrl}?name=${encodeURIComponent(query.trim())}&count=${count}&language=en&format=json`;
     return this.http.get<RawGeoResponse>(url).pipe(
       map((res) =>
         (res.results ?? []).map((r) => ({
@@ -45,7 +43,7 @@ export class GeocodingService {
   }
 
   reverse(latitude: number, longitude: number): Observable<GeoResult | null> {
-    const url = `${this.reverseUrl}?latitude=${latitude}&longitude=${longitude}&language=en&format=json`;
+    const url = `${environment.reverseUrl}?latitude=${latitude}&longitude=${longitude}&language=en&format=json`;
     return this.http.get<RawGeoResponse>(url).pipe(
       map((res) => {
         const r = res.results?.[0];

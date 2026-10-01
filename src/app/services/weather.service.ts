@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { CurrentWeather, DailyPoint, HourlyPoint, SpeedUnit, TempUnit } from '../models/weather.model';
-
+import { environment } from '../../environments/environments';
 interface RawForecastResponse {
   timezone: string;
   current: {
@@ -48,7 +48,6 @@ export interface ForecastResult {
 @Injectable({ providedIn: 'root' })
 export class WeatherService {
   private http = inject(HttpClient);
-  private readonly baseUrl = 'https://api.open-meteo.com/v1/forecast';
 
   getForecast(
     latitude: number,
@@ -68,7 +67,7 @@ export class WeatherService {
       wind_speed_unit: speedUnit,
       forecast_days: '7',
     });
-    const url = `${this.baseUrl}?${params.toString()}`;
+    const url = `${environment.forecast_baseUrl}?${params.toString()}`;
 
     return this.http.get<RawForecastResponse>(url).pipe(
       map((res) => {
