@@ -1,0 +1,17 @@
+.toggle {
+  display: flex;
+  padding: 4px;
+  flex-shrink: 0;
+}
+button {
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--ink-faint);
+  transition: background 0.2s, color 0.2s;
+}
+button.active {
+  background: linear-gradient(135deg, var(--accent), #6366f1);
+  color: #fff;
+}

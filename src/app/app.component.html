@@ -1,0 +1,52 @@
+<div class="app-shell">
+  <app-weather-scene
+    [weatherCode]="current()?.weatherCode ?? 0"
+    [isDay]="current()?.isDay ?? true"
+    [windSpeed]="current()?.windSpeed ?? 0"
+  ></app-weather-scene>
+
+  <div class="content container">
+    <header class="top-bar">
+      <div class="brand">
+        <span class="brand-mark">◐</span>
+        <span>Skyline</span>
+      </div>
+      <app-search-bar (locationSelected)="selectLocation($event)"></app-search-bar>
+      <app-unit-toggle [tempUnit]="tempUnit()" [speedUnit]="speedUnit()" (unitsChanged)="changeUnits($event)"></app-unit-toggle>
+    </header>
+
+    @if (loading()) {
+      <div class="state-panel glass">
+        <div class="spinner"></div>
+        <p>Fetching live weather…</p>
+      </div>
+    } @else if (error()) {
+      <div class="state-panel glass">
+        <span class="state-icon">⚠️</span>
+        <p>{{ error() }}</p>
+        <button class="btn btn-accent" (click)="retry()">Try again</button>
+      </div>
+    } @else if (current()) {
+      <app-current-weather
+        [location]="location()"
+        [current]="current()!"
+        [tempUnit]="tempUnit()"
+        [usedGeolocation]="usedGeolocation()"
+      ></app-current-weather>
+
+      <app-weather-details
+        [current]="current()!"
+        [today]="daily()[0]"
+        [speedUnit]="speedUnit()"
+      ></app-weather-details>
+
+      <app-hourly-forecast [hours]="next24h()" [tempUnit]="tempUnit()"></app-hourly-forecast>
+
+      <app-daily-forecast [days]="daily()" [tempUnit]="tempUnit()"></app-daily-forecast>
+
+      <footer class="data-credit">
+        <p>Live data via Open-Meteo · Timezone: {{ timezone() }}</p>
+      </footer>
+    }
+  </div>
+</div>

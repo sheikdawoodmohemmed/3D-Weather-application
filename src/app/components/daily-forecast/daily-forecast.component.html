@@ -1,0 +1,21 @@
+<section class="daily-card glass">
+  <h3>7-day forecast</h3>
+  <div class="daily-list">
+    @for (d of days; track d.time; let i = $index) {
+      <div class="day-row">
+        <span class="day-name">{{ dayName(d.time, i) }}</span>
+        <span class="day-emoji" [title]="label(d.weatherCode)">{{ emoji(d.weatherCode) }}</span>
+        @if (d.precipitationSum > 0.1) {
+          <span class="day-precip">💧{{ d.precipitationSum | number:'1.0-1' }}mm</span>
+        } @else {
+          <span class="day-precip"></span>
+        }
+        <span class="temp-min">{{ d.tempMin }}{{ unitSymbol }}</span>
+        <div class="range-track">
+          <div class="range-fill" [style.left.%]="rangeLeft(d)" [style.width.%]="rangeWidth(d)"></div>
+        </div>
+        <span class="temp-max">{{ d.tempMax }}{{ unitSymbol }}</span>
+      </div>
+    }
+  </div>
+</section>

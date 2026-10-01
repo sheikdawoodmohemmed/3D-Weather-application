@@ -1,0 +1,24 @@
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+}
+
+.detail-card {
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  .icon { font-size: 1.6rem; }
+  .d-label { font-size: 0.75rem; color: var(--ink-faint); }
+  .d-value { font-weight: 600; font-size: 0.95rem; }
+}
+
+@media (max-width: 900px) {
+  .details-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 520px) {
+  .details-grid { grid-template-columns: repeat(2, 1fr); }
+}

@@ -1,0 +1,18 @@
+<section class="hourly-card glass">
+  <h3>Next 24 hours</h3>
+  <div class="hourly-strip">
+    @for (h of hours; track h.time; let i = $index) {
+      <div class="hour-item">
+        <span class="hour-label">{{ formatHour(h.time, i) }}</span>
+        <span class="hour-emoji">{{ emoji(h.weatherCode) }}</span>
+        <div class="bar-track">
+          <div class="bar-fill" [style.height.%]="barHeight(h.temperature)"></div>
+        </div>
+        <span class="hour-temp">{{ h.temperature }}{{ unitSymbol }}</span>
+        @if (h.precipitationProbability > 10) {
+          <span class="precip">💧{{ h.precipitationProbability }}%</span>
+        }
+      </div>
+    }
+  </div>
+</section>

@@ -1,0 +1,45 @@
+.daily-card {
+  padding: 24px;
+  h3 { font-size: 1rem; margin-bottom: 18px; }
+}
+
+.daily-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.day-row {
+  display: grid;
+  grid-template-columns: 70px 32px 70px 32px 1fr 32px;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 4px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 0.85rem;
+}
+.day-row:last-child { border-bottom: none; }
+
+.day-name { font-weight: 600; }
+.day-emoji { font-size: 1.2rem; text-align: center; }
+.day-precip { font-size: 0.72rem; color: var(--accent); }
+.temp-min { color: var(--ink-faint); text-align: right; }
+.temp-max { font-weight: 600; text-align: left; }
+
+.range-track {
+  position: relative;
+  height: 4px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 999px;
+}
+.range-fill {
+  position: absolute;
+  top: 0; bottom: 0;
+  background: linear-gradient(90deg, var(--accent), var(--accent-warm));
+  border-radius: 999px;
+}
+
+@media (max-width: 560px) {
+  .day-row { grid-template-columns: 56px 26px 1fr 28px 60px 28px; font-size: 0.78rem; }
+  .day-precip { display: none; }
+}

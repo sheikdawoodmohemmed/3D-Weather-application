@@ -1,0 +1,20 @@
+<section class="current-card glass">
+  <div class="loc-row">
+    <h2>{{ placeLabel }}</h2>
+    @if (usedGeolocation) {
+      <span class="geo-badge">📍 Current location</span>
+    }
+  </div>
+  <p class="time">{{ formattedTime }}</p>
+
+  <div class="main-row">
+    <div class="temp-block">
+      <span class="temp">{{ current.temperature }}<small>{{ unitSymbol }}</small></span>
+      <span class="feels">Feels like {{ current.apparentTemperature }}{{ unitSymbol }}</span>
+    </div>
+    <div class="condition-block">
+      <span class="emoji">{{ emoji }}</span>
+      <span class="label">{{ label }}</span>
+    </div>
+  </div>
+</section>

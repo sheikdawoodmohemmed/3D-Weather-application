@@ -1,0 +1,32 @@
+<section class="details-grid">
+  <div class="detail-card glass">
+    <span class="icon">💧</span>
+    <span class="d-label">Humidity</span>
+    <span class="d-value">{{ current.humidity }}%</span>
+  </div>
+  <div class="detail-card glass">
+    <span class="icon">💨</span>
+    <span class="d-label">Wind</span>
+    <span class="d-value">{{ current.windSpeed }} {{ speedLabel }}</span>
+  </div>
+  <div class="detail-card glass">
+    <span class="icon">🧭</span>
+    <span class="d-label">Pressure</span>
+    <span class="d-value">{{ current.pressure }} hPa</span>
+  </div>
+  <div class="detail-card glass">
+    <span class="icon">🔆</span>
+    <span class="d-label">UV Index</span>
+    <span class="d-value">{{ current.uvIndex }} · {{ uvLevel }}</span>
+  </div>
+  <div class="detail-card glass">
+    <span class="icon">🌅</span>
+    <span class="d-label">Sunrise</span>
+    <span class="d-value">{{ formatTime(today?.sunrise) }}</span>
+  </div>
+  <div class="detail-card glass">
+    <span class="icon">🌇</span>
+    <span class="d-label">Sunset</span>
+    <span class="d-value">{{ formatTime(today?.sunset) }}</span>
+  </div>
+</section>
